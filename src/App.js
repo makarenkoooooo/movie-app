@@ -1,18 +1,25 @@
-import { Routes, Route } from 'react-router-dom'
-import { useState, useEffect, useContext } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { Box, Typography } from '@mui/material'
 import Filters from './components/Filters'
 import Header from './components/Header'
 import MovieList from './components/MovieList'
 import MovieDetails from './components/MovieDetails'
-import { UserProvider, UserContext } from './Contexts/UserContext'
 import { FiltersProvider, useFilters } from './Contexts/FiltersContext'
+import { useSelector } from 'react-redux'
 import { fetchMovies } from './services/api'
 
 function AppContent() {
   const { state, dispatch } = useFilters()
   const [movies, setMovies] = useState([])
-  const { token } = useContext(UserContext)
+  const token = useSelector((state) => state.user.token) // ✅ Берём токен из Redux
+  const navigate = useNavigate() // ✅ Используем для редиректа
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/') // ✅ Если нет токена, отправляем на главную
+    }
+  }, [token, navigate])
 
   useEffect(() => {
     if (!token) return
@@ -46,7 +53,7 @@ function AppContent() {
 
   return (
     <>
-      <Header /> {/* Теперь Header не будет сбрасываться при смене страниц */}
+      <Header /> {/* ✅ Теперь Header не сбрасывается при смене страниц */}
       <Box
         sx={{
           display: 'flex',
@@ -69,14 +76,12 @@ function AppContent() {
 
 function App() {
   return (
-    <UserProvider>
-      <FiltersProvider>
-        <Routes>
-          <Route path="/" element={<AppContent />} />
-          <Route path="/movie/:id" element={<MovieDetails />} />
-        </Routes>
-      </FiltersProvider>
-    </UserProvider>
+    <FiltersProvider>
+      <Routes>
+        <Route path="/" element={<AppContent />} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
+      </Routes>
+    </FiltersProvider>
   )
 }
 
