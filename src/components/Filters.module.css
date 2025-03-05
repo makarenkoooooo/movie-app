@@ -1,0 +1,39 @@
+.filters {
+  width: auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 16px;
+}
+
+.filtersHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 15px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.filters-genres {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters-genres label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
