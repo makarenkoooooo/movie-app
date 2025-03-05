@@ -35,9 +35,12 @@ function AppContent() {
 
   if (!token) {
     return (
-      <Typography variant="h6" align="center" sx={{ mt: 4 }}>
-        Пожалуйста, войдите в систему, чтобы увидеть фильмы.
-      </Typography>
+      <>
+        <Header />
+        <Typography variant="h6" align="center" sx={{ mt: 4 }}>
+          Пожалуйста, войдите в систему, чтобы увидеть фильмы.
+        </Typography>
+      </>
     )
   }
 
