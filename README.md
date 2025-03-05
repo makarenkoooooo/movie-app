@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# 🎮 Movie App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Movie App** – это React-приложение для поиска фильмов, просмотра деталей и добавления в избранное.
 
-## Available Scripts
+🔗 **[Деплой на GitHub Pages](https://makarenkoooooo.github.io/movie-app)**
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 **Используемые технологии**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| 🔧 Технология      | 📝 Описание                      |
+| ------------------ | -------------------------------- |
+| **React 19**       | Основной фреймворк               |
+| **Redux Toolkit**  | Управление глобальным состоянием |
+| **React Router 7** | Маршрутизация между страницами   |
+| **Material-UI**    | UI-компоненты для стилизации     |
+| **TMDb API**       | База данных фильмов              |
+| **GitHub Pages**   | Деплой проекта                   |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠 **Функциональность проекта**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### **🔹 1. Поиск фильмов**
 
-### `npm run build`
+- Использует **TMDb API** для получения данных
+- Позволяет искать фильмы по названию
+- Фильмы отображаются с обложками, рейтингом и годом выпуска
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **🔹 2. Фильтрация**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Фильтрация по жанрам (комедии, драмы и т.д.)
+- Сортировка по популярности или рейтингу
+- Выбор диапазона годов выхода
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **🔹 3. Избранное**
 
-### `npm run eject`
+- Фильмы можно **добавлять/удалять** из избранного
+- Используется Redux Toolkit для хранения данных
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **🔹 4. Страница с деталями фильма**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Показывает описание фильма, рейтинг, жанры
+- Загружает трейлер и список актеров (если доступно)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## **📝 Используемые API**
 
-## Learn More
+Приложение использует **TMDb API** для получения информации о фильмах.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Пример запроса:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+const API_URL = 'https://api.themoviedb.org/3/discover/movie'
+const API_KEY = 'ВАШ_КЛЮЧ'
 
-### Code Splitting
+fetch(`${API_URL}?api_key=${API_KEY}`)
+  .then((res) => res.json())
+  .then((data) => console.log(data))
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## **🛠 Оптимизация кода**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+В проекте используются **React-хуки**:  
+✅ **`useMemo`** – мемоизация данных для оптимизации  
+✅ **`useCallback`** – предотвращает ненужные пересоздания функций
 
-### Making a Progressive Web App
+Пример:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```js
+const filteredMovies = useMemo(() => {
+  return movies.filter((movie) => movie.vote_average > 7)
+}, [movies])
 
-### Advanced Configuration
+const toggleFavorite = useCallback(
+  (movie) => {
+    dispatch(toggleFavoriteAction(movie))
+  },
+  [dispatch]
+)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 📜 **Лицензия**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Этот проект распространяется по лицензии **MIT**.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🚀 **Приятного использования!** 🎉
